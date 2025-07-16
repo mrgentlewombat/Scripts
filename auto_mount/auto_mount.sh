@@ -7,7 +7,7 @@ log() {
 }
 
 log "=== Starting drive mount ==="
-user=$((whoami))
+user="${SUDO_USER:-$(whoami)}"
 
 
 while read -r uuid name; do
