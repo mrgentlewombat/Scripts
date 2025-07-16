@@ -7,16 +7,22 @@ log() {
 }
 
 log "=== Starting drive mount ==="
-user="${SUDO_USER:-$(whoami)}"
 
 
-while read -r uuid name; do
+while read -r uuid name mount_path; do
     # Skip comments and empty lines
     [[ "$uuid" =~ ^#|^$ ]] && continue
     [[ -z "$name" ]] && continue
+    [[ -z "$mount_path" ]] && continue
     
+
     dev_path="/dev/disk/by-uuid/$uuid"
-    mount_point="/media/$user/$name"
+
+    if [[ "$mount_path" == "default" ]]; then
+        mount_point="/media/wombat/$name"
+    else
+        mount_point="$mount_path/$name"
+    fi
     
     # Verify device exists
     if [[ ! -e "$dev_path" ]]; then

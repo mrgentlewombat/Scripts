@@ -7,16 +7,23 @@ log() {
 }
 
 log "=== Starting drive unmount ==="
-user=$((whoami))
 
 
 while read -r uuid name; do
     # Skip comments and empty lines
     [[ "$uuid" =~ ^#|^$ ]] && continue
     [[ -z "$name" ]] && continue
+    [[ -z "$mount_path" ]] && continue
     
+
     dev_path="/dev/disk/by-uuid/$uuid"
-    mount_point="/media/$user/$name"
+
+    if [[ "$mount_path" == "default" ]]; then
+        mount_point="/media/wombat/$name"
+    else
+        mount_point="$mount_path/$name"
+    done
+    
     
     # Verify device exists
     if [[ ! -e "$mount_point" ]]; then

@@ -47,7 +47,7 @@ while IFS= read -r line; do
     [[ "$line" =~ ^[[:space:]]*# || -z "$line" ]] && continue
     
     # Check format (UUID and name separated by space)
-    if ! [[ "$line" =~ ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[[:space:]]+[[:alnum:]_-]+$ ]]; then
+    if ! [[ "$line" =~ ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[[:space:]]+[[:alnum:]_-]+[[:space:]]+([[:alnum:]_/-]*|default) ]]; then
         echo "  [ERROR] Invalid line: $line"
         echo "          Format must be: [UUID] [mount_name]"
         echo "          Example: 123e4567-e89b-12d3-a456-426614174000 my_drive"

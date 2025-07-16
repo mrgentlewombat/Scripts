@@ -1,3 +1,4 @@
-# Format: [UUID] [mount_name]
+# Format: [UUID] [mount_name] [mount_dir]
+# 123e4567-e89b-12d3-a456-426614174000 main_drive /path/to/parent
 
-123e4567-e89b-12d3-a456-426614174000 main_drive
+123e4567-e89b-12d3-a456-426614174000 main_drive default
